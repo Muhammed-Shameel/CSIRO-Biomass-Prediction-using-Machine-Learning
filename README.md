@@ -1,25 +1,25 @@
-# 🌿 CSIRO Biomass Prediction using Machine Learning
+# 🌿 CSIRO Image2Biomass Prediction
 
 ## 📌 Project Overview
-This project focuses on predicting **plant biomass using machine learning techniques** on the **CSIRO Image2Biomass dataset**. Biomass estimation is an important problem in agriculture, ecology, and environmental monitoring, helping researchers understand vegetation productivity and ecosystem health.
+This project focuses on predicting **plant biomass** using machine learning models on the **CSIRO Image2Biomass dataset**. Biomass estimation is important for ecological monitoring, agriculture, and understanding vegetation productivity.
 
-The goal of this project was to build predictive models that estimate biomass accurately using vegetation indices, plant measurements, and species information.
+The objective of this project was to analyze biomass-related variables and build regression models capable of accurately predicting biomass values.
 
 ---
 
 ## 🎯 Objectives
-- Perform Exploratory Data Analysis (EDA) on biomass-related variables
-- Handle skewed biomass distributions
-- Engineer meaningful features from environmental variables
-- Train and evaluate machine learning models
-- Improve prediction performance using ensemble techniques
+- Perform exploratory data analysis (EDA) on biomass data
+- Investigate distribution of the biomass target variable
+- Train regression models using different loss functions
+- Compare model performance
+- Improve predictions using an ensemble approach
 
 ---
 
 ## 📊 Dataset
-The dataset used in this project comes from the **CSIRO Image2Biomass Challenge**.
+The dataset comes from the **CSIRO Image2Biomass challenge** and includes environmental and plant-related variables.
 
-It contains:
+Key variables include:
 
 - NDVI (Normalized Difference Vegetation Index)
 - Average plant height
@@ -27,7 +27,7 @@ It contains:
 - Location/state
 - Biomass measurements (target variable)
 
-The biomass target variable showed a **highly skewed distribution**, requiring transformation before modeling.
+The biomass variable showed **positive skew**, which was explored during analysis.
 
 ---
 
@@ -35,51 +35,37 @@ The biomass target variable showed a **highly skewed distribution**, requiring t
 
 Key observations:
 
-- Biomass distribution had **skewness ≈ 1.70**, indicating a strong right skew.
-- Applying **log transformation** helped stabilize variance and improve model performance.
-- Vegetation indices like **NDVI** and plant height showed strong correlation with biomass.
+- Biomass values were **right-skewed**, meaning larger biomass values were less frequent.
+- Vegetation-related variables such as **NDVI and plant height** showed relationships with biomass.
+- Data visualization helped understand the relationship between **true vs predicted biomass values**.
 
 ---
 
-## 🤖 Models Used
+## 🤖 Models Implemented
 
-Several machine learning models were trained and compared:
+The following regression models were implemented:
 
-- Random Forest Regressor
-- Gradient Boosting Models
-- XGBoost
-- Ensemble Model
-
-Models were evaluated using:
-
-- RMSE (Root Mean Squared Error)
-- R² Score
-
----
-
-## 📈 Results
-
-| Model | RMSE | R² |
-|------|------|------|
-| Baseline Model | 25.82 | — |
-| ML Model | 11.66 | — |
-| ML Model | 11.26 | — |
-| Gradient Boosting Model | 12.20 | 0.776 |
-| **Best Model** | **9.12** | **0.875** |
+- **MSE Model** (regression optimized using Mean Squared Error)
+- **Huber Model** (robust regression less sensitive to outliers)
+- **LogCosh Model** (smooth loss function similar to MSE but more robust)
 
 ### Ensemble Model
-**Weighted Ensemble RMSE:** 9.21
-
-### Improvement Over Baseline
-The final model improved prediction accuracy by approximately **64% compared to the baseline model**.
+A **weighted ensemble model** was created by combining predictions from the individual models to improve stability and prediction accuracy.
 
 ---
 
-## 💡 Key Insights
+## 📈 Model Evaluation
 
-- **NDVI** and **plant height** were among the most important predictors of biomass.
-- **Log transformation** significantly improved model learning due to skewed biomass values.
-- Ensemble learning helped reduce prediction error and improve model stability.
+Model predictions were evaluated using:
+
+- Root Mean Squared Error (**RMSE**)
+- Prediction error distribution
+- Visual comparison of **true vs predicted biomass**
+
+### Observations
+
+- The **ensemble model produced predictions closest to the ideal diagonal line** in the True vs Predicted plot.
+- Error distribution plots showed most prediction errors **centered around zero**, indicating reasonable predictive performance.
 
 ---
 
@@ -89,47 +75,16 @@ The final model improved prediction accuracy by approximately **64% compared to 
 - Pandas
 - NumPy
 - Scikit-learn
-- XGBoost
 - Matplotlib
 - Seaborn
 
----
-
-## 📂 Project Structure
-
-```
-csiro-biomass-prediction
-│
-├── csiro-Image2Biomass.ipynb
-├── README.md
-```
-
----
-
-## 🚀 How to Run
-
-Clone the repository:
-
-```bash
-git clone https://github.com/yourusername/csiro-biomass-prediction.git
-```
-
-Install dependencies:
-
-```bash
-pip install pandas numpy scikit-learn xgboost matplotlib seaborn
-```
-
-Run the notebook to reproduce the analysis.
-
----
 
 ## 📚 Key Learnings
 
-- Handling skewed scientific datasets
-- Feature engineering for environmental variables
-- Model comparison and evaluation
-- Ensemble modeling for improved predictive performance
+- Understanding biomass prediction problems
+- Exploring skewed environmental datasets
+- Comparing regression models using different loss functions
+- Improving predictions using ensemble modeling
 
 ---
 
@@ -138,10 +93,3 @@ Run the notebook to reproduce the analysis.
 **Muhammed Shameel**  
 MSc Data Science & Machine Learning Enthusiast
 
----
-
-## 🔗 Future Improvements
-
-- Hyperparameter tuning
-- Feature importance analysis
-- Model explainability using SHAP
